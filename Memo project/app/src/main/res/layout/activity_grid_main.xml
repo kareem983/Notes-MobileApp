@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GridMainActivity">
+
+    <LinearLayout
+        android:id="@+id/Grid_search_Container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/Grid_search_Edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Title"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:textSize="18sp"
+            android:textColor="#000" />
+
+        <ImageButton
+            android:id="@+id/Grid_DoneButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:background="#FFF"
+            android:layout_marginLeft="-30dp"
+            android:src="@drawable/ic_baseline_done_24"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/Grid_No_Notes_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/No_notes"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <GridView
+        android:id="@+id/grid_view"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:columnWidth="140dp"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
+        android:layout_below="@id/Grid_search_Container"
+        android:layout_margin="10dp" />
+
+    <LinearLayout
+        android:id="@+id/Grid_Delete_Container"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:background="#FFF7DA"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/deletIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_delete_24"
+            android:layout_gravity="center"
+            android:paddingTop="20dp"
+            tools:ignore="VectorDrawableCompat" />
+
+        <TextView
+            android:id="@+id/delete_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Delete"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="#000" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

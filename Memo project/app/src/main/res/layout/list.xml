@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/customshape">
+
+    <TextView
+        android:id="@+id/Title_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/content_view"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="15sp"
+        android:textColor="#838282"
+        android:paddingRight="15dp"
+        android:layout_below="@id/Title_view" />
+
+    <TextView
+        android:id="@+id/date_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:paddingBottom="10dp"
+        android:textSize="10sp"
+        android:textColor="#838282"
+        android:layout_below="@id/content_view" />
+
+    <ImageView
+        android:id="@+id/select_Image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/date_view"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="-55dp"
+        android:layout_marginTop="60dp" />
+
+</RelativeLayout>

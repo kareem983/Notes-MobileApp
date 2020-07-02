@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/goToGrid"
+        android:title="Grid View"
+        />
+
+    <item
+        android:id="@+id/List_refresh_id"
+        android:icon="@drawable/ic_baseline_refresh_24"
+        android:title="refresh"
+        app:showAsAction="always" />
+
+
+    <item
+        android:id="@+id/List_search_id"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="Seaech"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/List_add_id"
+        android:icon="@drawable/ic_baseline_add_24"
+        android:title="Add"
+        app:showAsAction="always" />
+
+</menu>

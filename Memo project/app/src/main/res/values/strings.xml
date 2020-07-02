@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Memo</string>
+    <string name="Update_title">Update a note</string>
+    <string name="Add_title">Add a note</string>
+    <string name="No_notes">no notes found</string>
+
+</resources>
