@@ -133,6 +133,24 @@ public class MyDataBase extends SQLiteOpenHelper {
 
 
 
+    public boolean noteIsFound (String SearcingTitle){
+        SQLiteDatabase dp=getReadableDatabase();
+        Cursor cursor = dp.rawQuery("SELECT * FROM "+Utils.TABLE1_NAME,null);
+        boolean isFound=false;
+        if(cursor.moveToFirst()){
+            do{
+                if(SearcingTitle.equalsIgnoreCase(cursor.getString(cursor.getColumnIndex(Utils.TITLE_KEY)) )){
+                    isFound=true; break;
+                }
+            }while(cursor.moveToNext());
+
+        }
+        cursor.close();
+        return isFound;
+    }
+
+
+
     public long restoreNumOfNotes(){
         SQLiteDatabase db=getReadableDatabase();
         return DatabaseUtils.queryNumEntries(db,Utils.TABLE1_NAME);

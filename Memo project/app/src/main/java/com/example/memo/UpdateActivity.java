@@ -76,13 +76,17 @@ public class UpdateActivity extends AppCompatActivity {
 
         if(updated_Title.isEmpty() || updated_Content.isEmpty()) Toast.makeText(UpdateActivity.this,"Empty cells",Toast.LENGTH_SHORT).show();
         else {
-            boolean isUpdated = db.UpdateNote(new Note(updated_Title, updated_Content, String.valueOf(updated_date)),cureent_Title_value);
-            if(isUpdated) {
-                Toast.makeText(UpdateActivity.this,"Note Updated successfully",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(UpdateActivity.this, ListMainActivity.class));
-                finish();
+            if (db.noteIsFound(updated_Title)) {
+                Toast.makeText(UpdateActivity.this, "you have a note with the same title", Toast.LENGTH_SHORT).show();
+            } else {
+                boolean isUpdated = db.UpdateNote(new Note(updated_Title, updated_Content, String.valueOf(updated_date)), cureent_Title_value);
+                if (isUpdated) {
+                    Toast.makeText(UpdateActivity.this, "Note Updated successfully", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(UpdateActivity.this, ListMainActivity.class));
+                    finish();
+                } else
+                    Toast.makeText(UpdateActivity.this, "No updated Added", Toast.LENGTH_SHORT).show();
             }
-            else Toast.makeText(UpdateActivity.this,"No updated Added",Toast.LENGTH_SHORT).show();
         }
 
     }
