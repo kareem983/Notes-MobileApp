@@ -52,6 +52,9 @@ public class ListMainActivity extends AppCompatActivity {
         DoneButton=(ImageButton)findViewById(R.id.DoneButton);
 
         numberOfNotedSelected=0;
+        notes=new ArrayList<>();
+        note_search=new ArrayList<>();
+
 
         if(db.getCurrentList().equals("Grid")){
             startActivity(new Intent(ListMainActivity.this,GridMainActivity.class));
@@ -61,14 +64,11 @@ public class ListMainActivity extends AppCompatActivity {
 
         // check there is at least one note in the database
         if(db.restoreNumOfNotes()!=0){
-            notes=new ArrayList<>();
-            note_search=new ArrayList<>();
             notes=db.getAllNotes();
             final NoteAdapter adapter=new NoteAdapter(this,notes);
             listView.setAdapter(adapter);
 
             //there are two list options (click to note to update it OR long click to select it to delete it)
-
 
             //on clicking at any note .... so go to update activity
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
