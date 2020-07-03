@@ -1,8 +1,10 @@
 package com.example.memo;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -28,8 +30,12 @@ public class ListMainActivity extends AppCompatActivity {
     private ImageButton DoneButton;
     private TextView no_notes_Found;
     private MyDataBase db;
-
     private long backPressed;
+
+    //AlertDialog variables
+    private int numberOfNotedSelected;
+    private String AlertMessage;
+    private String AlertSuccessfullyMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,8 @@ public class ListMainActivity extends AppCompatActivity {
         searchContainer=(LinearLayout)findViewById(R.id.search_Container);
         deleatContainer=(LinearLayout)findViewById(R.id.Delete_Container);
         DoneButton=(ImageButton)findViewById(R.id.DoneButton);
+
+        numberOfNotedSelected=0;
 
         if(db.getCurrentList().equals("Grid")){
             startActivity(new Intent(ListMainActivity.this,GridMainActivity.class));
@@ -208,18 +216,48 @@ public class ListMainActivity extends AppCompatActivity {
         deleatContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // delete all notes that signed by true
-                for(int i=0;i<notes.size();i++){
-                    if(notes.get(i).hase_Image==true) {
-                        boolean isDeleted = db.DeleteNote(notes.get(i).getTitle()); }
-                }
+                //check how many note selected then provide message that will show to the user
+                for(int i=0;i<notes.size();i++){ if(notes.get(i).hase_Image==true)numberOfNotedSelected++; }
 
-                notes=db.getAllNotes();
-                final NoteAdapter adapter=new NoteAdapter(ListMainActivity.this,notes);
-                listView.setAdapter(adapter);
-                Toast.makeText(ListMainActivity.this,"Deleted Successfully",Toast.LENGTH_SHORT).show();
-                Refresh();
+                    if(numberOfNotedSelected==1) {
+                        AlertMessage="Do you want to delete "+String.valueOf(numberOfNotedSelected)+" Note?";
+                        AlertSuccessfullyMessage=String.valueOf(numberOfNotedSelected)+" Note Deleted Successfully";
+                    }
+                    else {
+                        AlertMessage="Do you want to delete "+String.valueOf(numberOfNotedSelected)+" Notes?";
+                        AlertSuccessfullyMessage=String.valueOf(numberOfNotedSelected)+" Notes Deleted Successfully";
+                    }
+
+                 //create the AlertDialog then check the user choose yes or no
+                AlertDialog.Builder checkAlert = new AlertDialog.Builder(ListMainActivity.this);
+                checkAlert.setMessage(AlertMessage)
+                        .setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // delete all notes that signed by true
+                        for(int i=0;i<notes.size();i++){
+                            if(notes.get(i).hase_Image==true) {
+                                boolean isDeleted = db.DeleteNote(notes.get(i).getTitle()); }
+                        }
+
+                        notes=db.getAllNotes();
+                        final NoteAdapter adapter=new NoteAdapter(ListMainActivity.this,notes);
+                        listView.setAdapter(adapter);
+                        Toast.makeText(ListMainActivity.this,AlertSuccessfullyMessage,Toast.LENGTH_SHORT).show();
+                        Refresh();
+                    }
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        Refresh();
+                    }
+                });
+                AlertDialog alert = checkAlert.create();
+                alert.setTitle("Alert Message");
+                alert.show();
             }
+
         });
 
     }
@@ -236,6 +274,7 @@ public class ListMainActivity extends AppCompatActivity {
         searchContainer.setVisibility(View.GONE);
         deleatContainer.setVisibility(View.GONE);
         note_search.clear();
+        numberOfNotedSelected=0;
 
         //delete all selection from the note class
         for (int i = 0; i < notes.size(); i++) {
