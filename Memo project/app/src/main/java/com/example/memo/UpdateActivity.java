@@ -18,8 +18,8 @@ import java.util.Calendar;
 public class UpdateActivity extends AppCompatActivity {
     private EditText Title_text;
     private EditText Content_text;
-    private String cureent_Title_value;
-    private String cureent_Content_value;
+    private String current_Title_value;
+    private String current_Content_value;
     private MyDataBase db;
 
 
@@ -33,11 +33,11 @@ public class UpdateActivity extends AppCompatActivity {
         Content_text=(EditText)findViewById(R.id.update_content_id);
 
         //retriving data from mainActivity (Title, Content)
-        cureent_Title_value = getIntent().getStringExtra("Title");
-        cureent_Content_value = getIntent().getStringExtra("Content");
+        current_Title_value = getIntent().getStringExtra("Title");
+        current_Content_value = getIntent().getStringExtra("Content");
 
-        Title_text.setText(cureent_Title_value);
-        Content_text.setText(cureent_Content_value);
+        Title_text.setText(current_Title_value);
+        Content_text.setText(current_Content_value);
 
     }
 
@@ -76,10 +76,10 @@ public class UpdateActivity extends AppCompatActivity {
 
         if(updated_Title.isEmpty() || updated_Content.isEmpty()) Toast.makeText(UpdateActivity.this,"Empty cells",Toast.LENGTH_SHORT).show();
         else {
-            if (db.noteIsFound(updated_Title)) {
+            if (db.noteIsFound(updated_Title) && !current_Title_value.equalsIgnoreCase(updated_Title) ) {
                 Toast.makeText(UpdateActivity.this, "you have a note with the same title", Toast.LENGTH_SHORT).show();
             } else {
-                boolean isUpdated = db.UpdateNote(new Note(updated_Title, updated_Content, String.valueOf(updated_date)), cureent_Title_value);
+                boolean isUpdated = db.UpdateNote(new Note(updated_Title, updated_Content, String.valueOf(updated_date)), current_Title_value);
                 if (isUpdated) {
                     Toast.makeText(UpdateActivity.this, "Note Updated successfully", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(UpdateActivity.this, ListMainActivity.class));
