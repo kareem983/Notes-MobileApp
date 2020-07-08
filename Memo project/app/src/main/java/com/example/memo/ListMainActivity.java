@@ -43,7 +43,10 @@ public class ListMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_main);
         setTitle("Notes");
 
+
         db=new MyDataBase(this);
+        //just first build to select the first list
+        if(db.getCurrentList().isEmpty()) db.AddListState("List");
         no_notes_Found=(TextView)findViewById(R.id.No_Notes_id);
         listView=(ListView)findViewById(R.id.list_view);
         search_text=(EditText)findViewById(R.id.search_Edit);
@@ -54,7 +57,6 @@ public class ListMainActivity extends AppCompatActivity {
         numberOfNotedSelected=0;
         notes=new ArrayList<>();
         note_search=new ArrayList<>();
-
 
         if(db.getCurrentList().equals("Grid")){
             startActivity(new Intent(ListMainActivity.this,GridMainActivity.class));

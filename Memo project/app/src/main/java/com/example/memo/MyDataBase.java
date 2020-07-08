@@ -27,7 +27,6 @@ public class MyDataBase extends SQLiteOpenHelper {
 
         db.execSQL(Table1);
         db.execSQL(Table2);
-
     }
 
     @Override
@@ -159,6 +158,18 @@ public class MyDataBase extends SQLiteOpenHelper {
 
     //*********************************************************************
     //table2 check lists
+
+
+    public void AddListState(String StateList){
+        SQLiteDatabase db= getWritableDatabase();
+
+        ContentValues values=new ContentValues();
+
+        values.put(Utils.View_KEY,StateList);
+
+        long isAdded = db.insert(Utils.TABLE2_NAME,null,values);
+
+    }
 
 
     public boolean UpdateLists(String updatedList){
